@@ -33,7 +33,7 @@ This automated, hardware-aware framework dynamically analyzes model topologies a
 * [ ] NCU Kernel Profiling: Parse NVIDIA Nsight Compute metric exports (SM occupancy, memory bandwidth, block fragmentation).
 * [ ] Full Model Diagram: Expand model_viz.html to generate full end-to-end model dependency graphs.
 * [ ] **Fusion Mapping & Visual Overlay**: Render piecewise fusion boundaries in `model_viz.html` (e.g., grouping eager sub-nodes into fused piecewise blocks or highlighting candidate clusters).
-* [ ] **Optimization Recommender for Agents & Engineers**: Generate automated candidate reports (e.g., *"Layer 12 RMSNorm candidate for CUDA fusion"*) to feed directly into `KernelAgent` or guide manual engineering workflows.
+* [ ] **Optimization Recommender for Agents & Engineers**: Generate automated candidate reports (e.g., *"Layer 12 RMSNorm candidate for CUDA fusion"*) to feed directly into agents or guide manual engineering workflows.
 
 ### Future Scope (Long Term): Multi-Node & Distributed Scaling Support
 
