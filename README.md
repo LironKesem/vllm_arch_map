@@ -59,17 +59,35 @@ walk_model.py ──► model_tree.json
 
 ```
 vllm_arch_map/
+├── docs/
+│   └── images/
+│       ├── ModelArchAgent.png
+│       ├── qwen3_1.png
+│       ├── qwen3_2.png
+│       └── qwen3_3.png
+├── LICENSE
+├── notebooks/
 ├── README.md
-├── walk_model.py              # Stage 1: capture (runs on GPU)
-├── flow_support.py            # AST helper for walk_model.py
-├── profiler_to_diagram.py     # Stage 2: build (runs locally)
-├── model_viz.html             # Stage 3: visualize (browser)
-│
-├── images/                    # Screenshots
-├── profiles/                  # PyTorch traces (.pt.trace.json)
-├── model_tree.json            # Model structure + config
-├── model_execution.json       # Diagram data (viewer input)
-└── qwen3_serve_trace.*        # Raw NSYS traces (future use)
+├── samples/
+│   ├── model_execution.json
+│   ├── model_tree.json
+│   ├── model_viz.html
+│   └── traces/
+│       ├── profiles/
+│       │   ├── profiler_out_0.txt
+│       │   ├── rank0.1789640479161371744.pt.trace.json
+│       │   └── rank0.1789640479161371744.pt.trace.json.gz
+│       ├── profiles-0ea472b7-4e84-48f0-988f-54b4e5465830/
+│       │   ├── profiler_out_0.txt
+│       │   └── rank0.1790649506042672784.pt.trace.json.gz
+│       ├── qwen3_serve_trace.nsys-rep
+│       └── qwen3_serve_trace.sqlite
+├── tests/
+└── vllm_arch_map/
+    ├── flow_support.py
+    ├── __init__.py
+    ├── profiler_to_diagram.py
+    └── walk_model.py
 ```
 
 ## Quickstart
@@ -158,10 +176,10 @@ Kernel drill-down:
 - [x] Interactive D3.js viewer with module tree, inline expansion, hover tooltips
 - [x] Bottleneck-colored duration bars
 - [x] Per-layer variance sidebar (for collapsed repeated layers)
-- [wip] Model Generalization: Refactor entry points to support any vLLM model architecture. - note: i need to test it on differnet model.
-- [ ] Per-layer drill-down: populate `layer_template` / `per_layer` for vLayer/vStep views
+- [ ] Model Generalization: Refactor entry points to support any vLLM model architecture.
 - [ ] NSYS data parsing and add the insights to the report and html
 - [ ] NCU kernel profiling: SM occupancy, memory bandwidth, block fragmentation, add the insights to the report and html
+- [ ] Per-layer drill-down: populate `layer_template` / `per_layer` for vLayer/vStep views
 - [ ] Full Model Diagram: Expand model_viz.html to generate full end-to-end model dependency graphs.
 - [ ]  **Fusion Mapping & Visual Overlay**: Render piecewise fusion boundaries in `model_viz.html` (e.g., grouping eager sub-nodes into fused piecewise blocks or highlighting candidate clusters)
 
