@@ -80,7 +80,7 @@ vllm_arch_map/
 vllm serve Qwen/Qwen3-8B \
     --enforce-eager \
     --profiler-config.profiler=torch \
-    --profiler-config.torch_profiler_dir=./profiles \
+    --profiler-config.torch_profiler_dir=./samples/traces/profiles \
     --profiler-config.torch_profiler_record_shapes=true \
     --profiler-config.torch_profiler_with_stack=true \
     --enable-layerwise-nvtx-tracing \
@@ -100,15 +100,15 @@ Produces: profiles/rank0.*.pt.trace.json.gz
 ### Step 3: Extract model tree (on GPU)
 
 ```bash
-VLLM_ALLOW_INSECURE_SERIALIZATION=1 python walk_model.py Qwen/Qwen3-8B -o model_tree.json --with-forward
-# Produces: model_tree.json + profiles/*.json
+VLLM_ALLOW_INSECURE_SERIALIZATION=1 python vllm_arch_map/walk_model.py Qwen/Qwen3-8B -o samples/model_tree.json --with-forward --profile-dir  ./samples/traces/
+# Produces: samples/model_tree.json + /samples/traces/profiles/*.json
 ```
 
 ### Step 4: Build diagram data (locally)
 
 ```bash
-python3 profiler_to_diagram.py
-# Produces: model_execution.json
+python3 vllm_arch_map/profiler_to_diagram.py --out_dir samples/ --traces-dir samples/traces
+# Produces: samples/model_execution.json
 ```
 
 ### Step 5: View
@@ -128,7 +128,7 @@ nsys profile \
     --cuda-graph-trace=node \
     -t cuda,nvtx,osrt \
     -w true \
-    -o qwen3_serve_trace \
+    -o samples/traces/qwen3_serve_trace \
     vllm serve Qwen/Qwen3-8B \
     --enforce-eager \
     --enable-layerwise-nvtx-tracing \
