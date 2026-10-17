@@ -243,8 +243,24 @@ Tested on DGX SPARK + Qwen/Qwen3-8B.
 
 ## Screenshots
 
-Top-level model view:
-![Top view](./docs/images/qwen3_1.png)
+### Workload Dashboard
+Request timeline (Gantt chart with real start times), per-request E2E latency, TTFT, decode, queue, ITL, and server-side Prometheus metrics.
+
+![Workload Dashboard](./docs/images/workload.png)
+
+### Request Inspector
+Per-request drill-down: TTFT/decode breakdown bar, hierarchical call tree with per-request timing columns, per-layer heatmap, and inter-token latency chart.
+
+![Inspector overview](./docs/images/inspector_a.png)
+
+Module tree with CPU op → GPU kernel mapping across 3 requests. Layer variance chart (right) shows per-layer timing with outlier detection.
+
+![Inspector module tree](./docs/images/inspector_b.png)
+
+### Architecture
+Top-level model view with per-layer duration sidebar:
+
+![Architecture top view](./docs/images/qwen3_1.png)
 
 Decoder layer detail:
 ![Decoder layer](./docs/images/qwen3_2.png)
