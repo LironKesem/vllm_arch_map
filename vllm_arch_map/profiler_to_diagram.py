@@ -325,6 +325,7 @@ def _add_cross_layer_stats(template, all_layers):
             if oi < len(layer_ops):
                 durs.append(layer_ops[oi]["dur_us"])
         if len(durs) > 1:
+            op["dur_us"] = round(sum(durs), 1)
             op["avg_us"] = round(statistics.mean(durs), 1)
             op["min_us"] = round(min(durs), 1)
             op["max_us"] = round(max(durs), 1)
@@ -338,6 +339,7 @@ def _add_cross_layer_stats(template, all_layers):
             if ci < len(layer_ch):
                 durs.append(layer_ch[ci]["dur_us"])
         if len(durs) > 1:
+            ch["dur_us"] = round(sum(durs), 1)
             ch["avg_dur_us"] = round(statistics.mean(durs), 1)
             ch["min_dur_us"] = round(min(durs), 1)
             ch["max_dur_us"] = round(max(durs), 1)
